@@ -20,6 +20,7 @@ export interface Project {
 	title: string;
 	description: string;
 	tags: string[];
+	image?: string;
 	link?: {
 		url: string;
 		label: string;
@@ -29,6 +30,7 @@ export interface Project {
 export interface Interest {
 	icon: string; 
 	label: string;
+	description: string;
 }
 
 export interface PortfolioData {
@@ -46,6 +48,8 @@ export interface PortfolioData {
 		tagline: string;
 	};
 }
+
+export const siteUrl = 'https://waleedalvi.com';
 
 export const portfolio: PortfolioData = {
 	name: 'Waleed Alvi',
@@ -101,7 +105,7 @@ export const portfolio: PortfolioData = {
 				'Modernized legacy frontend to React/TypeScript, improving the developer experience and enabling a cleaner path to future migrations.',
 				'Built and actively maintain a shared component library establishing a consistent design language across all new features and migrations.'
 			],
-			tags: ['C#', 'React', 'TypeScript', 'SQL Server']
+			tags: ['.NET', 'C#', 'React', 'TypeScript', 'SQL Server']
 		},
 		{
 			company: 'Coyote Software Corporation',
@@ -131,7 +135,7 @@ export const portfolio: PortfolioData = {
 				"Collaborated with stakeholders to deliver an automated labelling application integrated into the company's modular platform, applying the MVVM pattern to cleanly separate business logic from the UI layer.",
 				"Designed and developed a data collection application for a large-scale food processing company, integrating third-party APIs to fetch ingredient data and persist it to a SQL Server database with precise calculation logic.",
 			],
-			tags: ['VB.NET', 'C#', 'XAML', 'WinForms', 'SQL Server']
+			tags: ['.NET','VB.NET', 'C#', 'XAML', 'WinForms', 'SQL Server']
 		}
 	],
 
@@ -139,21 +143,42 @@ export const portfolio: PortfolioData = {
 		{
 			title: 'ArtFinderTCG',
 			description:
-				'Smart Search for Pokémon Cards. Find cards by describing their artwork, powered by AI and semantic search.',
-			tags: ['C#', 'React', 'TypeScript', 'Supabase', 'Pinecone', 'Google Gemini'],
+				'Smart Search for Pokémon Cards. Find cards by describing their artwork, powered by AI and semantic search. Pokémon cards are not searchable by artwork using traditional methods, which was one of the main driving forces behind this project.<br><br>A background service, designed using an onion architecture and SOLID principles, processes each card through a vision model to get a detailed description, which is then stored as embeddings. This allows the app to match your words to the feeling and vibe of a card. ArtFinderTCG is live and is actively used by collectors.',
+			tags: ['.NET','C#', 'React', 'TypeScript', 'Supabase', 'Pinecone', 'Google Gemini'],
+			image: '/images/projects/artfindertcg.webp',
 			link: { url: 'https://artfindertcg.com', label: 'Explore' }
 		},
         {
 			title: 'Insurance Point',
 			description:
-				'Landing page for an insurance company.',
-			tags: ['HTML', 'CSS', 'JavaScript'],
+				'A responsive landing page for an insurance broker, featuring a contact form for potential client inquiries, service highlights, and testimonials from past clients.',
+			tags: ['HTML', 'SASS', 'JavaScript'],
+			image: '/images/projects/insurancepoint.webp',
 			link: { url: 'https://insurancepoint.ca', label: 'Explore' }
 		},
 	],
 
 	interests: [
-		// { icon: 'buildings', label: 'Brutalist Arch.' },
+		{
+			icon: 'cards',
+			label: 'Pokémon TCG',
+			description: 'I collect and play the Pokémon TCG — which is also what led me to build ArtFinderTCG.'
+		},
+		{
+			icon: 'house',
+			label: 'Home Lab',
+			description: 'I run a self-hosted stack at home — Proxmox, Home Assistant, Frigate NVR with a Coral TPU, Jellyfin, Pi-hole. It feels like a full-time job.'
+		},
+		{
+			icon: 'paw-print',
+			label: 'Sansa',
+			description: 'My beagle. She has strong opinions about when I should stop coding for the day.'
+		},
+		{
+			icon: 'soccer-ball',
+			label: 'Sports',
+			description: 'Big fan of soccer and basketball — always keeping up with matches, with my teams being AC Milan and The Toronto Raptors.'
+		},
 	],
 
 	footer: {

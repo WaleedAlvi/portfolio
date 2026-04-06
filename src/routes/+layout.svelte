@@ -1,6 +1,5 @@
 <script lang="ts">
 	import '$lib/styles/theme.css';
-	import favicon from '$lib/assets/favicon.svg';
 	import Nav from '$lib/components/Nav.svelte';
 	import Footer from '$lib/components/Footer.svelte';
 
@@ -8,8 +7,8 @@
 </script>
 
 <svelte:head>
-	<link rel="icon" href={favicon} />
-	<title>Portfolio</title>
+	<link rel="icon" type="image/png" href="/images/logo_circle.png" />
+	<title>Waleed Alvi — Software Engineer</title>
 </svelte:head>
 
 <Nav />

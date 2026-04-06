@@ -59,7 +59,6 @@
 	<div class="sidebar-brand">
 		<span class="brand-text">{portfolio.name}</span>
 		<span class="brand-sub">{portfolio.title}</span>
-		<p class="brand-headline">{portfolio.heroHeadline}</p>
 	</div>
 
 	<ul class="nav-links">
@@ -94,7 +93,7 @@
 </nav>
 
 <header class="mobile-bar">
-	<span class="mobile-brand">Portfolio</span>
+	<span class="mobile-brand">Waleed Alvi</span>
 	<button
 		class="hamburger"
 		onclick={() => (mobileOpen = !mobileOpen)}
@@ -180,15 +179,6 @@
 		letter-spacing: var(--text-label-tracking);
 		text-transform: uppercase;
 		color: var(--primary);
-	}
-
-	.brand-headline {
-		font-size: 0.875rem;
-		font-weight: 400;
-		line-height: 1.5;
-		color: var(--on-surface-variant);
-		margin-top: var(--space-3);
-		opacity: 0.7;
 	}
 
 	.nav-links {

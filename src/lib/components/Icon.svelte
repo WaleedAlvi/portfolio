@@ -14,7 +14,12 @@
 		Buildings,
 		PenNib,
 		Camera,
-		Terminal
+		Terminal,
+		Cards,
+		House,
+		PawPrint,
+		SoccerBall,
+		Basketball
 	} from 'phosphor-svelte';
 	import type { IconWeight } from 'phosphor-svelte';
 	import type { Component } from 'svelte';
@@ -42,7 +47,12 @@
 		buildings: Buildings,
 		'pen-nib': PenNib,
 		camera: Camera,
-		terminal: Terminal
+		terminal: Terminal,
+		cards: Cards,
+		house: House,
+		'paw-print': PawPrint,
+		'soccer-ball': SoccerBall,
+		basketball: Basketball
 	};
 
 	const Icon = $derived(iconMap[name]);

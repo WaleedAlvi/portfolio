@@ -1,20 +1,48 @@
 <script lang="ts">
-	import { portfolio } from '$lib/data/portfolio';
+	import { portfolio, siteUrl } from '$lib/data/portfolio';
 	import SectionHeader from '$lib/components/SectionHeader.svelte';
 	import Chip from '$lib/components/Chip.svelte';
 	import Icon from '$lib/components/Icon.svelte';
 	import { ArrowUpRight } from 'phosphor-svelte';
+
+	const pageTitle = `${portfolio.name} — ${portfolio.title}`;
+	const sameAs = portfolio.socialLinks
+		.filter((l) => l.platform === 'github' || l.platform === 'linkedin')
+		.map((l) => l.url);
+
+	const jsonLd = {
+		'@context': 'https://schema.org',
+		'@type': 'Person',
+		name: portfolio.name,
+		jobTitle: portfolio.title,
+		url: siteUrl,
+		sameAs,
+		description: portfolio.heroHeadline
+	};
 </script>
 
 <svelte:head>
-	<title>{portfolio.name} — {portfolio.title}</title>
+	<title>{pageTitle}</title>
 	<meta name="description" content={portfolio.heroHeadline} />
+
+	<link rel="canonical" href={siteUrl} />
+
+	<meta property="og:type" content="website" />
+	<meta property="og:url" content={siteUrl} />
+	<meta property="og:title" content={pageTitle} />
+	<meta property="og:description" content={portfolio.heroHeadline} />
+	<meta property="og:site_name" content={portfolio.name} />
+	<meta property="og:locale" content="en_US" />
+	<meta name="twitter:card" content="summary" />
+	<meta name="twitter:title" content={pageTitle} />
+	<meta name="twitter:description" content={portfolio.heroHeadline} />
+
+	{@html `<script type="application/ld+json">${JSON.stringify(jsonLd)}</script>`}
 </svelte:head>
 
 <section id="hero" class="hero">
 	<h1 class="hero-name mobile-only">{portfolio.name}</h1>
 	<p class="hero-title mobile-only">{portfolio.title}</p>
-	<p class="hero-headline mobile-only">{portfolio.heroHeadline}</p>
 
 	<div class="hero-links mobile-only">
 		{#each portfolio.socialLinks as social}
@@ -78,31 +106,43 @@
 	<div class="project-grid">
 		{#each portfolio.projects as project}
 			<article class="project-card">
-				<h3 class="project-title">
-					{#if project.link}
-						<a href={project.link.url} target="_blank" rel="noopener noreferrer">{project.title}</a>
-					{:else}
-						{project.title}
-					{/if}
-				</h3>
-				<p class="project-description">{project.description}</p>
-
-				{#if project.link}
-					<a
-						href={project.link.url}
-						class="project-link"
-						target="_blank"
-						rel="noopener noreferrer"
-					>
-						{project.link.label}
-						<ArrowUpRight size={16} weight="light" />
-					</a>
+				{#if project.image}
+					<img
+						class="project-image"
+						src={project.image}
+						alt="{project.title} screenshot"
+						loading="lazy"
+						width="600"
+						height="375"
+					/>
 				{/if}
+				<div class="project-content">
+					<h3 class="project-title">
+						{#if project.link}
+							<a href={project.link.url} target="_blank" rel="noopener noreferrer">{project.title}</a>
+						{:else}
+							{project.title}
+						{/if}
+					</h3>
+					<p class="project-description">{@html project.description}</p>
 
-				<div class="tags">
-					{#each project.tags as tag}
-						<Chip label={tag} />
-					{/each}
+					{#if project.link}
+						<a
+							href={project.link.url}
+							class="project-link"
+							target="_blank"
+							rel="noopener noreferrer"
+						>
+							{project.link.label}
+							<ArrowUpRight size={16} weight="light" />
+						</a>
+					{/if}
+
+					<div class="tags">
+						{#each project.tags as tag}
+							<Chip label={tag} />
+						{/each}
+					</div>
 				</div>
 			</article>
 		{/each}
@@ -116,7 +156,10 @@
 		{#each portfolio.interests as interest}
 			<div class="interest-item">
 				<span class="interest-icon"><Icon name={interest.icon} size={24} /></span>
-				<span class="interest-label">{interest.label}</span>
+				<div class="interest-text">
+					<span class="interest-label">{interest.label}</span>
+					<p class="interest-description">{interest.description}</p>
+				</div>
 			</div>
 		{/each}
 	</div>
@@ -141,15 +184,6 @@
 		font-weight: var(--text-title-weight);
 		color: var(--on-surface-variant);
 		margin-bottom: var(--space-8);
-	}
-
-	.hero-headline {
-		font-size: var(--text-headline);
-		font-weight: var(--text-headline-weight);
-		line-height: var(--text-headline-leading);
-		color: var(--on-surface);
-		max-width: 600px;
-		margin-bottom: var(--space-10);
 	}
 
 	.hero-links {
@@ -305,13 +339,29 @@
 		border-radius: var(--radius-lg);
 		background-color: var(--surface-container-low);
 		display: flex;
-		flex-direction: column;
-		gap: var(--space-3);
+		flex-direction: row;
+		align-items: flex-start;
+		gap: var(--space-6);
 		transition: background-color 0.15s ease;
 	}
 
 	.project-card:hover {
 		background-color: var(--surface-container-high);
+	}
+
+	.project-image {
+		width: 40%;
+		flex-shrink: 0;
+		height: auto;
+		border-radius: var(--radius-md);
+	}
+
+	.project-content {
+		display: flex;
+		flex-direction: column;
+		gap: var(--space-3);
+		flex: 1;
+		min-width: 0;
 	}
 
 	.project-title {
@@ -355,16 +405,16 @@
 	}
 
 	.interests-grid {
-		display: grid;
-		grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
-		gap: var(--space-4);
+		display: flex;
+		flex-direction: column;
+		gap: var(--space-8);
 	}
 
 	.interest-item {
 		display: flex;
-		align-items: center;
+		align-items: flex-start;
 		gap: var(--space-3);
-		padding: var(--space-4) var(--space-5);
+		padding: var(--space-6);
 		border-radius: var(--radius-lg);
 		background-color: var(--surface-container-low);
 		transition: background-color 0.15s ease;
@@ -380,10 +430,23 @@
 		color: var(--primary);
 	}
 
+	.interest-text {
+		display: flex;
+		flex-direction: column;
+		gap: var(--space-1);
+	}
+
 	.interest-label {
 		font-size: var(--text-body);
 		font-weight: var(--text-body-weight);
 		color: var(--on-surface-variant);
+	}
+
+	.interest-description {
+		font-size: 0.8125rem;
+		line-height: 1.5;
+		color: var(--on-surface-variant);
+		opacity: 0.7;
 	}
 
 	.tags {
@@ -400,7 +463,7 @@
 	@media (max-width: 767px) {
 		.hero {
 			display: block;
-			padding-bottom: var(--space-section);
+			padding-bottom: var(--space-16);
 		}
 
 		.mobile-only {
@@ -411,16 +474,20 @@
 			font-size: 2.5rem;
 		}
 
-		.hero-headline {
-			font-size: 1.375rem;
-		}
-
 		.about-content {
 			padding-left: 0;
 		}
 
+		.project-card {
+			flex-direction: column;
+		}
+
+		.project-image {
+			width: 100%;
+		}
+
 		.interests-grid {
-			grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+			gap: var(--space-6);
 		}
 	}
 </style>
