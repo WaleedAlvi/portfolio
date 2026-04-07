@@ -4,6 +4,7 @@
 	import Chip from '$lib/components/Chip.svelte';
 	import Icon from '$lib/components/Icon.svelte';
 	import { ArrowUpRight } from 'phosphor-svelte';
+	import DogTaxLightbox from '$lib/components/DogTaxLightbox.svelte';
 
 	const pageTitle = `${portfolio.name} — ${portfolio.title}`;
 	const sameAs = portfolio.socialLinks
@@ -66,6 +67,7 @@
 		{#each portfolio.about as paragraph}
 			<p class="about-text">{@html paragraph}</p>
 		{/each}
+		<DogTaxLightbox imageSrc="/images/sansa.webp" />
 	</div>
 </section>
 
@@ -237,6 +239,27 @@
 
 	.about-text :global(a:hover) {
 		text-decoration: underline;
+	}
+
+	.about-text :global(.dog-tax-trigger) {
+		background: none;
+		border: none;
+		padding: 0;
+		margin: 0;
+		font: inherit;
+		font-weight: 700;
+		font-style: italic;
+		color: var(--primary);
+		cursor: pointer;
+		text-decoration: underline dashed;
+		text-decoration-color: var(--outline);
+		text-underline-offset: 3px;
+		transition: text-decoration-color 0.15s ease;
+	}
+
+	.about-text :global(.dog-tax-trigger:hover) {
+		text-decoration: underline solid;
+		text-decoration-color: var(--primary);
 	}
 
 	.experience {
