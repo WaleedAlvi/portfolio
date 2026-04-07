@@ -72,7 +72,7 @@ export const portfolio: PortfolioData = {
 		},
 		{
 			platform: 'linkedin',
-			url: 'https://linkedin.com/in/waleedalvi',
+			url: 'https://www.linkedin.com/in/waleed-alvi-30a12b36b/',
 			label: 'LinkedIn',
 			icon: 'linkedin-logo'
 		},
