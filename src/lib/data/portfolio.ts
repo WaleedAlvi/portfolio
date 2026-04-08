@@ -58,7 +58,7 @@ export const portfolio: PortfolioData = {
 	heroHeadline: 'Full-stack engineer with an eye for the details that matter.',
 
 	about: [
-		"I'm a Full Stack Engineer who believes good code should be as easy to maintain as it is to ship. With 9 years of professional experience working across the .NET ecosystem and various frontend frameworks, I've had plenty of opportunities to put that into practice.",
+		"I'm a Full-Stack Engineer who believes good code should be as easy to maintain as it is to ship. With 9 years of professional experience working across the .NET ecosystem and various frontend frameworks, I've had plenty of opportunities to put that into practice.",
 		"Currently at <a href='https://yangaroo.com' target='_blank' rel='noopener noreferrer'>Yangaroo</a>, I manage and develop their Advertisement and Music Delivery platforms. I've implemented features such as an Analytics tool to track ad reach across key data points like demographics and region, and led the modernization of legacy frontend code using React and TypeScript. I also mentor interns and junior developers, providing code reviews and demonstrating best practices for writing clean, maintainable code.",
 		"Outside of work, I've built and launched <a href='https://artfindertcg.com' target='_blank' rel='noopener noreferrer'>ArtFinderTCG</a>, powered by AI and semantic search to find Pokémon cards by describing their artwork. It started as a personal itch — I collect Pokémon cards — and turned into something other collectors genuinely find useful. I also run my own smart home using <a href='https://home-assistant.io' target='_blank' rel='noopener noreferrer'>Home Assistant</a>. It's fun automating redundant tasks around the house, but it sure does feel like a full-time job at times. Outside of the screen, I love to spend quality time with my wife and my beagle, <button type='button' class='dog-tax-trigger' data-dog-tax aria-label='Show photo of Sansa'>Sansa</button>."
 	],
@@ -94,7 +94,7 @@ export const portfolio: PortfolioData = {
 		{
 			company: 'Yangaroo',
 			companyUrl: 'https://yangaroo.com',
-			role: 'Fullstack Software Engineer',
+			role: 'Full-Stack Software Engineer',
 			startYear: '2021',
 			endYear: 'PRESENT',
 			description:
@@ -110,7 +110,7 @@ export const portfolio: PortfolioData = {
 		{
 			company: 'Coyote Software Corporation',
 			companyUrl: 'https://www.coyotecorp.com/',
-			role: 'Fullstack Software Engineer',
+			role: 'Full-Stack Software Engineer',
 			startYear: '2019',
 			endYear: '2021',
 			description:
