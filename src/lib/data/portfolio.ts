@@ -84,7 +84,7 @@ export const portfolio: PortfolioData = {
 		},
 		{
 			platform: 'resume',
-			url: '/resume.pdf',
+			url: '/Waleed_Alvi_Resume_2026.pdf',
 			label: 'Resume',
 			icon: 'read-cv-logo'
 		}
