@@ -2,8 +2,34 @@
 	import '$lib/styles/theme.css';
 	import Nav from '$lib/components/Nav.svelte';
 	import Footer from '$lib/components/Footer.svelte';
+	import { onMount } from 'svelte';
+	import { afterNavigate } from '$app/navigation';
+	import { PUBLIC_GA_MEASUREMENT_ID } from '$env/static/public';
 
 	let { children } = $props();
+
+	onMount(() => {
+		if (!PUBLIC_GA_MEASUREMENT_ID) return;
+
+		const script = document.createElement('script');
+		script.async = true;
+		script.src = `https://www.googletagmanager.com/gtag/js?id=${PUBLIC_GA_MEASUREMENT_ID}`;
+		document.head.appendChild(script);
+
+		window.dataLayer = window.dataLayer || [];
+		window.gtag = function gtag(...args: unknown[]) {
+			window.dataLayer.push(args);
+		};
+		window.gtag('js', new Date());
+		window.gtag('config', PUBLIC_GA_MEASUREMENT_ID);
+	});
+
+	afterNavigate(() => {
+		if (!PUBLIC_GA_MEASUREMENT_ID || !window.gtag) return;
+		window.gtag('config', PUBLIC_GA_MEASUREMENT_ID, {
+			page_path: window.location.pathname
+		});
+	});
 </script>
 
 <svelte:head>
