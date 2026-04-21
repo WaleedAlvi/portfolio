@@ -8,8 +8,20 @@
 
 	let { children } = $props();
 
+	function trackPageView(debugMode: boolean) {
+		if (!PUBLIC_GA_MEASUREMENT_ID || !window.gtag) return;
+
+		window.gtag('event', 'page_view', {
+			page_title: document.title,
+			page_location: window.location.href,
+			page_path: window.location.pathname,
+			...(debugMode ? { debug_mode: true } : {})
+		});
+	}
+
 	onMount(() => {
 		if (!PUBLIC_GA_MEASUREMENT_ID) return;
+		const debugMode = new URLSearchParams(window.location.search).has('ga_debug');
 
 		const script = document.createElement('script');
 		script.async = true;
@@ -21,14 +33,13 @@
 			window.dataLayer.push(args);
 		};
 		window.gtag('js', new Date());
-		window.gtag('config', PUBLIC_GA_MEASUREMENT_ID);
+		window.gtag('config', PUBLIC_GA_MEASUREMENT_ID, { send_page_view: false });
+		trackPageView(debugMode);
 	});
 
 	afterNavigate(() => {
-		if (!PUBLIC_GA_MEASUREMENT_ID || !window.gtag) return;
-		window.gtag('config', PUBLIC_GA_MEASUREMENT_ID, {
-			page_path: window.location.pathname
-		});
+		const debugMode = new URLSearchParams(window.location.search).has('ga_debug');
+		trackPageView(debugMode);
 	});
 </script>
 
