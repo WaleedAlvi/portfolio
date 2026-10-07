@@ -5,10 +5,17 @@ export interface SocialLink {
 	icon: string; 
 }
 
+export interface PreviousRole {
+	role: string;
+	startYear: string;
+	endYear: string;
+}
+
 export interface Experience {
 	company: string;
 	companyUrl: string;
 	role: string;
+	previousRoles?: PreviousRole[];
 	startYear: string;
 	endYear: string;
 	description: string;
@@ -93,8 +100,11 @@ export const portfolio: PortfolioData = {
 	experience: [
 		{
 			company: 'Yangaroo',
-			companyUrl: 'https://yangaroo.com',
-			role: 'Full-Stack Software Engineer',
+			companyUrl: 'https://	.com',
+			role: 'Lead Software Engineer, DMDS',
+			previousRoles: [
+				{ role: 'Full-Stack Software Engineer', startYear: '2021', endYear: '2026' }
+			],
 			startYear: '2021',
 			endYear: 'PRESENT',
 			description:

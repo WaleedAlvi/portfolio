@@ -83,6 +83,13 @@
 				<div class="card-body">
 					<h3 class="role">{job.role}</h3>
 					<p class="company"><a href={job.companyUrl} target="_blank" rel="noopener noreferrer">{job.company}</a></p>
+					{#if job.previousRoles?.length}
+						<ul class="previous-roles">
+							{#each job.previousRoles as previous}
+								<li>Previously: {previous.role} ({previous.startYear} — {previous.endYear})</li>
+							{/each}
+						</ul>
+					{/if}
 					<p class="description">{job.description}</p>
 					{#if job.highlights.length}
 						<ul class="highlights">
@@ -319,6 +326,16 @@
 
 	.company a:hover {
 		text-decoration: underline;
+	}
+
+	.previous-roles {
+		list-style: none;
+		display: flex;
+		flex-direction: column;
+		gap: var(--space-1);
+		font-size: var(--text-label);
+		font-weight: var(--text-label-weight);
+		color: var(--on-surface-variant);
 	}
 
 	.description {
